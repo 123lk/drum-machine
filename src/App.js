@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './app.css';
+import drumData from './drumData.json';
 
 class App extends Component {
   playSound(id) {
@@ -12,39 +13,15 @@ class App extends Component {
           <div className="row">
             <div className="col-md-8">
               <div className="row">
-                <div className="col-md-4 drum-pad">
-                  <button type="button" className="btn btn-outline-secondary btn-block" onClick={this.playSound.bind(this, "Q")}>Q
-                    <audio id="Q" src="https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3"></audio>
-                  </button>
-                </div>
-                <div className="col-md-4 drum-pad">
-                  <button type="button" className="btn btn-outline-secondary btn-block">W</button>
-                </div>
-                <div className="col-md-4 drum-pad">
-                  <button type="button" className="btn btn-outline-secondary btn-block">E</button>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-4 drum-pad">
-                  <button type="button" className="btn btn-outline-secondary btn-block">A</button>
-                </div>
-                <div className="col-md-4 drum-pad">
-                  <button type="button" className="btn btn-outline-secondary btn-block">S</button>
-                </div>
-                <div className="col-md-4 drum-pad">
-                  <button type="button" className="btn btn-outline-secondary btn-block">D</button>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-4 drum-pad">
-                  <button type="button" className="btn btn-outline-secondary btn-block">Z</button>
-                </div>
-                <div className="col-md-4 drum-pad">
-                  <button type="button" className="btn btn-outline-secondary btn-block">X</button>
-                </div>
-                <div className="col-md-4 drum-pad">
-                  <button type="button" className="btn btn-outline-secondary btn-block">C</button>
-                </div>
+                {drumData.map((drumPad) => {
+                  return (
+                    <div className="col-md-4 drum-pad" key={drumPad.id}>
+                      <button type="button" className="btn btn-outline-secondary btn-block" onClick={this.playSound.bind(this, drumPad.id)}>{drumPad.id}
+                        <audio id={drumPad.id} src={drumPad.src}></audio>
+                      </button>
+                    </div>
+                  )
+                })}
               </div>
             </div>
             <div className="col-md-4" id="display"> 
